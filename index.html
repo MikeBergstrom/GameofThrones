@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Game of Thrones Info</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>$(document).ready(function(){
+        $('img').click(function(){
+            var house = $(this).attr("id");
+            var url = "https://www.anapioficeandfire.com/api/houses/"+house+"/";
+            console.log(house);
+
+        $.get(url, function(res){
+                $('#name').text(res.name);
+                $('#words').text(res.words);
+                var titles = [];
+                for(var i=0; i<res.titles.length; i++){
+                    titles += "<li>" + res.titles[i]+ "<li>";
+                };
+                $('#titles').append(titles);
+            console.log(res);
+            console.log(titles);
+        },"json");
+    })
+    })
+    </script>
+</head>
+<body>
+    <h1>Game of Thrones House Information</h1>
+    <div id="cards">
+        <img id="15" src="baratheon.png" alt="Baratheon" width="300">
+        <img id="229"src="lannister.jpg" alt="Lannister" width="300">
+        <img id="362" src="stark.jpg" alt="Stark" width="300">
+        <img id="378" src="targaryen.jpg" alt="Targaryen" width="300">
+    </div>
+    <div id="info">
+        <h2>House Details</h2>
+        <h3>Name: </h3>
+        <h4 id="name"></h4>
+        <h3>Words: </h3>
+        <h4 id="words"></h4>
+        <h3>Titles: </h3>
+        <ul id="titles"></ul>
+    </div>
+</body>
